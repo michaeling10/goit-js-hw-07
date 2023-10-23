@@ -4,11 +4,9 @@ import { galleryItems } from "./gallery-items.js";
 
 // Change code below this line
 
-// Get the gallery container and create an empty array to store gallery items
 const galleryContainer = document.querySelector(".gallery");
 const galleryItemElements = [];
 
-// Render gallery items from galleryItems data
 galleryItems.forEach((item, index) => {
   const galleryItem = document.createElement("li");
   galleryItem.classList.add("gallery__item");
@@ -29,10 +27,8 @@ galleryItems.forEach((item, index) => {
   galleryItemElements.push(galleryItem);
 });
 
-// Append gallery items to the gallery container
 galleryContainer.append(...galleryItemElements);
 
-// Delegation to ul.gallery for handling clicks
 galleryContainer.addEventListener("click", (event) => {
   event.preventDefault();
   if (event.target.nodeName === "IMG") {
@@ -42,13 +38,21 @@ galleryContainer.addEventListener("click", (event) => {
       const description = clickedImage.alt;
 
       if (source) {
-        // Open the modal window with BasicLightbox
         const instance = basicLightbox.create(
-          `<img src="${source}" alt="${description}">`
+          `<img src="${source}" alt="${description}">`,
+          {
+            onShow: (instance) => {
+              document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") {
+                  instance.close();
+                }
+              });
+            },
+          }
         );
         instance.show();
       } else {
-        console.error("Missing data-source attribute on the clicked image.");
+        console.error("Missing data-source attribute on the clicked image");
       }
     } catch (error) {
       console.error("Error when opening the modal:", error);
