@@ -3,11 +3,10 @@
 import { galleryItems } from "./gallery-items.js";
 
 // Change code below this line
-
 const galleryContainer = document.querySelector(".gallery");
 const galleryItemElements = [];
 
-galleryItems.forEach((item, index) => {
+galleryItems.forEach((item) => {
   const galleryItem = document.createElement("li");
   galleryItem.classList.add("gallery__item");
 
@@ -20,7 +19,6 @@ galleryItems.forEach((item, index) => {
   galleryImage.src = item.preview;
   galleryImage.setAttribute("data-source", item.original);
   galleryImage.alt = item.description;
-  galleryImage.dataset.index = index;
 
   galleryLink.appendChild(galleryImage);
   galleryItem.appendChild(galleryLink);
