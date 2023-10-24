@@ -33,10 +33,11 @@ function handleKeyDown(e, instance) {
   }
 }
 
-var lightbox = new SimpleLightbox(".gallery a", {
+const lightbox = new SimpleLightbox(".gallery a", {
   onShow: (instance) => {
     document.addEventListener("keydown", (e) => handleKeyDown(e, instance));
   },
+  captionDelay: 250,
 });
 
 console.log(galleryItems);
